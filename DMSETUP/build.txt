@@ -14,17 +14,20 @@ build for 32bit, static linked with dietlibc
 
 ======== Build Step ======== 
 1. extract device mapper source code
-2. CC="diet gcc" ./configure --disable-nls  --disable-selinux --disable-shared
+2. while ="dietlibc gcc" ./configure --disable-nls  --disable-selinux --disable-shared
 3. modify include/configure.h file
    --- delete the line with "#define malloc rpl_malloc"
-   --- add 2 defines as follow:
-       #ifndef UINT32_MAX
-       #define UINT32_MAX  (4294967295U)
-       #endif
+   --- add 3 defines as follow:
+       ifndef UINT32_MAX
+       define UINT32_MAX  (4294967295U)
+       endif
        
-       #ifndef UINT64_C
-       #define UINT64_C(c) c ## ULL
-       #endif
+       ifndef UINT64_C
+       define UINT64_C(c) 
+       
+       ifndef UINTARM64
+       define UINTARM64   ##NULL
+       endif
    
 4. make
 5. strip dmsetup/dmsetup
@@ -63,6 +66,7 @@ build for 32bit, static linked with dietlibc
 4. make
 5. mips64el-linux-musl-strip dmsetup/dmsetup.static
 6. get dmsetup/dmsetup.static as the dmsetupm64e binary file
+
 
 
 
